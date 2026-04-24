@@ -1,15 +1,5 @@
 ﻿# Reflection
 
-### TODO
-- Explain Instance, Static, public, non public
-- Explain reflection (please use HC/GM to explain instead of random placeholder names)
-- Use of reflection helper
-- How to get/set private fields
-  - How to get/set fields in classes (eg how to set HeroController.rb2d.velocity (get RigidBody2D and use that))
-- How to get/set private properties
-- How to call private functions
-  - Showcase new MAPI ReflectionHelper for methods
-
 If you need to read, write, or invoke private fields and methods, this is possible to do with reflection. Usually they are private for a reason, so be sure you know what you're doing.
 
 To access a nonpublic field, you can define a `FieldInfo` object to reference a class's field by name. This is an expensive process, so it is good practice to define the field once and only access its value at runtime. To do this, call `typeof(<the class you want>).GetField(<the field name>, <the corresponding BindingFlags>);`
@@ -17,7 +7,7 @@ In most cases, the flags you'll use are `BindingFlags.NonPublic | BindingFlags.I
 
 A FieldInfo object holds a reference to the class itself, not a specific object of that class, so to retrieve or modify the value, you'll need to supply the actual instance of the object you intend to use. If you're using a static field, simply pass `null` instead. Fields can be read with `.GetValue(object obj)` and set with `.SetValue(object obj, object value)` as shown below. These are generalized methods that take and return `object` type, so be sure to cast as needed.
 ```cs
-FieldInfo camTargetVelocityX;
+static FieldInfo camTargetVelocityX;
 
 // During initialization
 camTargetVelocityX = typeof(CameraTarget).GetField("velocityX", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -44,3 +34,14 @@ enableCursor.Invoke(null, [true]);
 ```
 
 It is perhaps worth noting that reflection can also access public fields and methods, which is less common but has its uses if you want to find things by name.
+
+
+### TODO
+- Explain Instance, Static, public, non public
+- Explain reflection (please use HC/GM to explain instead of random placeholder names)
+- Use of reflection helper
+- How to get/set private fields
+  - How to get/set fields in classes (eg how to set HeroController.rb2d.velocity (get RigidBody2D and use that))
+- How to get/set private properties
+- How to call private functions
+  - Showcase new MAPI ReflectionHelper for methods

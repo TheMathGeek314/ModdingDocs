@@ -7,10 +7,8 @@ In most cases, the flags you'll use are `BindingFlags.NonPublic | BindingFlags.I
 
 A FieldInfo object holds a reference to the class itself, not a specific object of that class, so to retrieve or modify the value, you'll need to supply the actual instance of the object you intend to use. If you're using a static field, simply pass `null` instead. Fields can be read with `.GetValue(object obj)` and set with `.SetValue(object obj, object value)` as shown below. These are generalized methods that take and return `object` type, so be sure to cast as needed.
 ```cs
-static FieldInfo camTargetVelocityX;
-
-// During initialization
-camTargetVelocityX = typeof(CameraTarget).GetField("velocityX", BindingFlags.NonPublic | BindingFlags.Instance);
+// Initialize at declaration
+static FieldInfo camTargetVelocityX = typeof(CameraTarget).GetField("velocityX", BindingFlags.NonPublic | BindingFlags.Instance);
 
 // Read value at runtime
 Vector3 velocity = camTargetVelocityX.GetValue(GameCameras.instance.cameraTarget) as Vector3;
